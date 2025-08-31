@@ -60,6 +60,17 @@ class ArregloRedimensionableDeRecordatorios {
         this.lista =otroArreglo.lista;
         this.longitud = otroArreglo.longitud;       
     }
+        // otra forma
+    // public ArregloRedimensionableDeRecordatorios(ArregloRedimensionableDeRecordatorios vector) {
+    //     // Implementar
+    //     this.lista = new Recordatorio[vector.longitud];
+    //     // tengo que inicializar this.lista porque esto es otro constructor
+    //     this.longitud = 0 ;
+    //     for (int i= 0 ;i<vector.longitud;i++ ){
+    //         this.lista[i] = new Recordatorio(vector.lista[i].mensaje(),vector.lista[i].fecha(),vector.lista[i].horario());
+    //         this.longitud +=1;
+    //     }
+    // }
 
     public ArregloRedimensionableDeRecordatorios copiar() {
         // Implementar
