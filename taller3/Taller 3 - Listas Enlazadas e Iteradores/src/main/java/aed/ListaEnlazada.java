@@ -28,30 +28,38 @@ public class ListaEnlazada<T> {
     }
 
     public void agregarAdelante(T elem) {
-        if(this.nodoPrimero.valor == null){
-            this.nodoPrimero.valor = elem;
+        Nodo nuevoNodo = new Nodo(elem);
+        if(this.nodoPrimero == null){
+            this.nodoPrimero = nuevoNodo;
+            this.nodoUltimo = nuevoNodo;
+        }else{
+            nuevoNodo.nodoSiguiente = this.nodoPrimero;
+            this.nodoPrimero = nuevoNodo;
         }
-        else{
-            Nodo nodoNuevo = new Nodo(elem);
-            nodoNuevo.nodoSiguiente = nodoPrimero;
-            nodoPrimero = nodoNuevo;
-        }
-        this.longitud += 1;
+        this.longitud++;
+
     }
 
     public void agregarAtras(T elem) {
-        while(this.nodoPrimero != null){
-            nodoPrimero = nodoPrimero.nodoSiguiente;
+        Nodo nuevoNodo = new Nodo(elem);
+        if(nodoPrimero== null){
+            nodoPrimero = nuevoNodo;
+            nodoUltimo = nuevoNodo;
+        }else{
+            nuevoNodo.nodoAnterior = this.nodoUltimo;
+            this.nodoUltimo = nuevoNodo;
         }
-        
+        this.longitud++;
     }
 
     public T obtener(int i) {
+        Nodo nodoAuxiliar = this.nodoPrimero;
         int j = 0;
         while(j<i){
-            nodoPrimero = nodoPrimero.nodoSiguiente;
+            nodoAuxiliar = nodoAuxiliar.nodoSiguiente;
+            j++;
         }
-        return nodoPrimero.valor;
+        return nodoAuxiliar.valor;
     }
 
     public void eliminar(int i) {
