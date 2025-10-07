@@ -64,15 +64,41 @@ public class ListaEnlazada<T> {
     }
 
     public void eliminar(int i) {
-        throw new UnsupportedOperationException("No implementada aun");
+        Nodo nodoAuxiliar = this.nodoPrimero;
+        int j=0;
+        while(j<i){
+            nodoAuxiliar = nodoAuxiliar.nodoSiguiente;
+            j++;
+        }
+        // separamos en 3 casos 
+        if(nodoAuxiliar == this.nodoPrimero){// si i =0 eliminmos el primer elemento 
+            this.nodoPrimero = nodoAuxiliar.nodoSiguiente;
+        }else if(nodoAuxiliar == nodoUltimo){
+            this.nodoUltimo = nodoAuxiliar.nodoAnterior;
+        }
+        else{
+            nodoAuxiliar = nodoAuxiliar.nodoAnterior;
+            nodoAuxiliar.nodoSiguiente = nodoAuxiliar.nodoSiguiente.nodoSiguiente;  
+
+        }
+        this.longitud--;
     }
 
     public void modificarPosicion(int indice, T elem) {
-        throw new UnsupportedOperationException("No implementada aun");
+        Nodo nodoAuxiliar = this.nodoPrimero;
+        int j=0;
+        while(j<indice){
+            nodoAuxiliar = nodoAuxiliar.nodoSiguiente;
+            j++;
+        }
+        nodoAuxiliar.valor = elem;    
     }
 
     public ListaEnlazada(ListaEnlazada<T> lista) {
-        throw new UnsupportedOperationException("No implementada aun");
+        ListaEnlazada listaCopia = new ListaEnlazada<T>();
+        listaCopia.nodoPrimero = lista.nodoPrimero;
+        listaCopia.nodoUltimo = lista.nodoUltimo;
+        
     }
     
     @Override
