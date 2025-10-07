@@ -42,12 +42,13 @@ public class ListaEnlazada<T> {
 
     public void agregarAtras(T elem) {
         Nodo nuevoNodo = new Nodo(elem);
-        if(nodoPrimero== null){
-            nodoPrimero = nuevoNodo;
+        if(nodoUltimo == null){
+            nodoPrimero = nuevoNodo;// 
             nodoUltimo = nuevoNodo;
         }else{
-            nuevoNodo.nodoAnterior = this.nodoUltimo;
-            this.nodoUltimo = nuevoNodo;
+            this.nodoUltimo.nodoSiguiente = nuevoNodo;// "conectmos" el ultimo.siguiente a el nuevo Ndoo  
+            nuevoNodo.nodoAnterior = this.nodoUltimo;// aca "concectamos" el nodoanterior del nuevo nodo a el ultimo nodo de nuestra instancia   
+            this.nodoUltimo = nuevoNodo; // reemplazamos el ultimo noodo de la isntncia por el nuevo nodo que ya esta "conectado" al ultimo nodo de una instancia anterior 
         }
         this.longitud++;
     }
@@ -56,7 +57,7 @@ public class ListaEnlazada<T> {
         Nodo nodoAuxiliar = this.nodoPrimero;
         int j = 0;
         while(j<i){
-            nodoAuxiliar = nodoAuxiliar.nodoSiguiente;
+            nodoAuxiliar = nodoAuxiliar.nodoSiguiente; 
             j++;
         }
         return nodoAuxiliar.valor;
