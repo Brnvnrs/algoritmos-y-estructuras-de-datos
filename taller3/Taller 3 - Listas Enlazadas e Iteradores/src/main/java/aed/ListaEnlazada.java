@@ -34,6 +34,7 @@ public class ListaEnlazada<T> {
             this.nodoUltimo = nuevoNodo;
         }else{
             nuevoNodo.nodoSiguiente = this.nodoPrimero;
+            this.nodoPrimero.nodoAnterior = nuevoNodo;
             this.nodoPrimero = nuevoNodo;
         }
         this.longitud++;
@@ -66,21 +67,25 @@ public class ListaEnlazada<T> {
     public void eliminar(int i) {
         Nodo nodoAuxiliar = this.nodoPrimero;
         int j=0;
-        while(j<i){
+        while(j<i && nodoAuxiliar != null){
             nodoAuxiliar = nodoAuxiliar.nodoSiguiente;
             j++;
         }
         // separamos en 3 casos 
         if(nodoAuxiliar == this.nodoPrimero){// si i =0 eliminmos el primer elemento 
             this.nodoPrimero = nodoAuxiliar.nodoSiguiente;
-        }else if(nodoAuxiliar == nodoUltimo){
-            this.nodoUltimo = nodoAuxiliar.nodoAnterior;
-        }
-        else{
-            nodoAuxiliar = nodoAuxiliar.nodoAnterior;
-            nodoAuxiliar.nodoSiguiente = nodoAuxiliar.nodoSiguiente.nodoSiguiente;  
+        }else{
 
+            if(nodoAuxiliar == this.nodoUltimo){
+                this.nodoUltimo = nodoAuxiliar.nodoAnterior;
+            }else{
+            nodoAuxiliar.nodoAnterior.nodoSiguiente = nodoAuxiliar.nodoSiguiente;
+            nodoAuxiliar.nodoSiguiente.nodoAnterior = nodoAuxiliar.nodoAnterior;
+
+            }
         }
+
+        
         this.longitud--;
     }
 
@@ -95,17 +100,29 @@ public class ListaEnlazada<T> {
     }
 
     public ListaEnlazada(ListaEnlazada<T> lista) {
-        ListaEnlazada listaCopia = new ListaEnlazada<T>();
-        listaCopia.nodoPrimero = lista.nodoPrimero;
-        listaCopia.nodoUltimo = lista.nodoUltimo;
-        
+        ListaEnlazada listaCopia = new ListaEnlazada<>();
+        Nodo nodoAuxiliar = lista.nodoPrimero;
+        while(nodoAuxiliar !=null){
+            listaCopia.agregarAtras(nodoAuxiliar.valor);
+            nodoAuxiliar = nodoAuxiliar.nodoSiguiente;
+        }
+        this.nodoPrimero = listaCopia.nodoPrimero;
+        this.nodoUltimo = listaCopia.nodoUltimo;
+        this.longitud = listaCopia.longitud;
     }
     
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("No implementada aun");
+        String res = "[";
+        Nodo nodoAuxiliar = this.nodoPrimero;
+        res = res + nodoAuxiliar.valor;
+        while(nodoAuxiliar.nodoSiguiente != null){
+            nodoAuxiliar = nodoAuxiliar.nodoSiguiente;
+            res = res + ", " + nodoAuxiliar.valor ;
+        }
+        res = res+ "]";
+        return res;
     }
-
     public class ListaIterador{
     	// Completar atributos privados
 
