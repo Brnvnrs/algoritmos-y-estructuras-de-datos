@@ -28,8 +28,8 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
 
     public ABB() {
         this.raiz = null;
-        this.cardinal = 0;
-    }
+            this.cardinal = 0;
+                }
 
 
     public int cardinal() {
@@ -192,7 +192,7 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
         //este truquito de los isEmpty se fija si el string esta vacio, o sea si esta vacio es xq es el primer elemento entonces no pone coma.
         return izquierda + (izquierda.isEmpty() ? "" : ",") + actual.dato.toString() + (derecha.isEmpty() ? "" : ",") + derecha;
     }
-
+    @Override
     public String toString(){ 
         Nodo aux = this.raiz;
         String res = "{";
